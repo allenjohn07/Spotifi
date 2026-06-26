@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
 import { useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,13 +11,12 @@ import ProfileAvatar from '@/components/ProfileAvatar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { libraryFilters, libraryItems } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
-import { useTabContentPadding } from '@/hooks/useTabContentPadding';
 import type { LibraryItem } from '@/types';
 
 export default function LibraryScreen() {
   const { colors } = useTheme();
   const [activeFilter, setActiveFilter] = useState('Playlists');
-  const bottomPadding = useTabContentPadding();
+  const bottomPadding = useBottomTabBarHeight() + 40;
 
   const handlePress = (item: LibraryItem) => {
     if (item.type === 'action') return;

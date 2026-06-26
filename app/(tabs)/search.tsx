@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,11 +13,10 @@ import {
   discoverItems,
 } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
-import { useTabContentPadding } from '@/hooks/useTabContentPadding';
 
 export default function SearchScreen() {
   const { colors } = useTheme();
-  const bottomPadding = useTabContentPadding();
+  const bottomPadding = useBottomTabBarHeight() + 40;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>

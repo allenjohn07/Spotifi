@@ -1,14 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ThemeToggle from '@/components/ThemeToggle';
 import { useTheme } from '@/context/ThemeContext';
-import { useTabContentPadding } from '@/hooks/useTabContentPadding';
 
 export default function CreateScreen() {
   const { colors } = useTheme();
-  const bottomPadding = useTabContentPadding();
+  const bottomPadding = useBottomTabBarHeight() + 40;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>

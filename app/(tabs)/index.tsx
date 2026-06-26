@@ -1,3 +1,4 @@
+import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
 import { useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,13 +10,12 @@ import SectionHeader from '@/components/SectionHeader';
 import ThemeToggle from '@/components/ThemeToggle';
 import { homeFilters, homeSections } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
-import { useTabContentPadding } from '@/hooks/useTabContentPadding';
 import type { HomeCard } from '@/types';
 
 export default function HomeScreen() {
   const { colors } = useTheme();
   const [activeFilter, setActiveFilter] = useState('All');
-  const bottomPadding = useTabContentPadding();
+  const bottomPadding = useBottomTabBarHeight() + 40;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>

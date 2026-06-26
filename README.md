@@ -1,6 +1,6 @@
 # Spotifi
 
-A Spotify-inspired multi-screen mobile app built with **Expo**, **TypeScript**, and **Expo Router** for the SAIT assignment *Advanced Multi-Screen Mobile Application with Collaborative Navigation*.
+A Spotify-inspired multi-screen mobile app built with **Expo**, **TypeScript**, and **Expo Router** for the SAIT assignment *Advanced Multi-Screen Mobile Application with Collaborative Navigation* (CPRG 303 B, Spring 2026).
 
 ## Reference Application
 
@@ -101,7 +101,6 @@ spotifi/
 ├── components/                  # Reusable UI components
 ├── constants/                   # Colors, mock data
 ├── context/                     # ThemeContext
-├── hooks/                       # useTabContentPadding
 ├── types/                       # TypeScript interfaces
 └── docs/images/                 # Reference & app screenshots
 ```
@@ -130,4 +129,6 @@ Then press `i` for iOS simulator, `a` for Android emulator, or scan the QR code 
 
 ## Author
 
-SAIT — Mobile Application Development Assignment
+**Allen John** — Student ID: 000961216  
+**Course:** CPRG 303 B — Mobile Application Development (Spring 2026)  
+**Institution:** SAIT
