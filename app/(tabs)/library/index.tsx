@@ -16,7 +16,7 @@ import type { LibraryItem } from '@/types';
 export default function LibraryScreen() {
   const { colors } = useTheme();
   const [activeFilter, setActiveFilter] = useState('Playlists');
-  const bottomPadding = useBottomTabBarHeight() + 40;
+  const bottomPadding = useBottomTabBarHeight() + 20;
 
   const handlePress = (item: LibraryItem) => {
     if (item.type === 'action') return;

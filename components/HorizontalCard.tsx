@@ -1,12 +1,13 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
+import CoverImage from '@/components/CoverImage';
 import { useTheme } from '@/context/ThemeContext';
 import type { CardVariant } from '@/types';
 
 type HorizontalCardProps = {
   title: string;
   subtitle: string;
-  imageColor: string;
+  imageUrl: string;
   variant?: CardVariant;
   size?: 'large' | 'medium' | 'small';
   onPress?: () => void;
@@ -15,28 +16,17 @@ type HorizontalCardProps = {
 export default function HorizontalCard({
   title,
   subtitle,
-  imageColor,
+  imageUrl,
   variant = 'square',
   size = 'medium',
   onPress,
 }: HorizontalCardProps) {
   const { colors } = useTheme();
   const imageSize = size === 'large' ? 150 : size === 'small' ? 100 : 130;
-  const borderRadius = variant === 'circle' ? imageSize / 2 : 6;
 
   return (
     <Pressable onPress={onPress} style={[styles.container, { width: imageSize }]}>
-      <View
-        style={[
-          styles.image,
-          {
-            width: imageSize,
-            height: imageSize,
-            borderRadius,
-            backgroundColor: imageColor,
-          },
-        ]}
-      />
+      <CoverImage uri={imageUrl} size={imageSize} variant={variant} />
       <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
         {title}
       </Text>
@@ -51,12 +41,10 @@ const styles = StyleSheet.create({
   container: {
     marginRight: 12,
   },
-  image: {
-    marginBottom: 10,
-  },
   title: {
     fontSize: 14,
     fontWeight: '600',
+    marginTop: 10,
     marginBottom: 4,
   },
   subtitle: {

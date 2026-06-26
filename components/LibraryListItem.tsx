@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import CoverImage, { CoverImageWithOverlay } from '@/components/CoverImage';
 import { useTheme } from '@/context/ThemeContext';
 import type { LibraryItem } from '@/types';
 
@@ -15,30 +16,32 @@ export default function LibraryListItem({ item, onPress }: LibraryListItemProps)
   const isAction = item.type === 'action';
 
   const imageContent = isAction ? (
-    <View style={[styles.image, styles.circle, { backgroundColor: item.imageColor }]}>
+    <View style={[styles.image, styles.circle, { backgroundColor: colors.cardElevated }]}>
       <Ionicons name="add" size={24} color={colors.textSecondary} />
     </View>
   ) : item.id === 'liked' ? (
-    <View style={[styles.image, styles.square, { backgroundColor: '#5038a0' }]}>
+    <CoverImageWithOverlay
+      uri={item.imageUrl!}
+      size={48}
+      variant="square"
+      overlayColor="rgba(80, 56, 160, 0.65)">
       <Ionicons name="heart" size={20} color="#ffffff" />
-    </View>
+    </CoverImageWithOverlay>
   ) : (
-    <View
-      style={[
-        styles.image,
-        isCircle ? styles.circle : styles.square,
-        { backgroundColor: item.imageColor },
-      ]}
+    <CoverImage
+      uri={item.imageUrl!}
+      size={48}
+      variant={isCircle ? 'circle' : 'square'}
     />
   );
 
   return (
     <Pressable onPress={onPress} style={styles.row}>
-      {imageContent}
+      <View style={styles.imageWrap}>{imageContent}</View>
       <View style={styles.textContainer}>
         <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
-            {item.title}
-          </Text>
+          {item.title}
+        </Text>
         {item.subtitle ? (
           <Text style={[styles.subtitle, { color: colors.textSecondary }]} numberOfLines={1}>
             {item.subtitle}
@@ -56,15 +59,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
+  imageWrap: {
+    marginRight: 12,
+  },
   image: {
     width: 48,
     height: 48,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
-  },
-  square: {
-    borderRadius: 4,
   },
   circle: {
     borderRadius: 24,

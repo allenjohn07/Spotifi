@@ -8,7 +8,7 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function CreateScreen() {
   const { colors } = useTheme();
-  const bottomPadding = useBottomTabBarHeight() + 40;
+  const bottomPadding = useBottomTabBarHeight() + 20;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>

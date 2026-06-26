@@ -1,25 +1,31 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
 import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { premiumFeatures } from '@/constants/mockData';
+import ProfileAvatar from '@/components/ProfileAvatar';
 import ThemeToggle from '@/components/ThemeToggle';
+import { premiumFeatures, premiumHeroImage } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function PremiumScreen() {
   const { colors } = useTheme();
-  const bottomPadding = useBottomTabBarHeight() + 40;
+  const bottomPadding = useBottomTabBarHeight() + 20;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>
-      <View style={styles.topBar}>
-        <ThemeToggle />
-      </View>
       <ScrollView
         contentContainerStyle={{ paddingBottom: bottomPadding }}
         showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <ProfileAvatar />
+          <Text style={[styles.title, { color: colors.text }]}>Premium</Text>
+          <ThemeToggle />
+        </View>
+
         <View style={styles.hero}>
+          <Image source={{ uri: premiumHeroImage }} style={StyleSheet.absoluteFill} contentFit="cover" />
           <View style={styles.heroOverlay}>
             <View style={styles.heroLabel}>
               <MaterialCommunityIcons name="spotify" size={16} color="#ffffff" />
@@ -54,17 +60,23 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
-  topBar: {
+  header: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 14,
-    paddingBottom: 10,
+    paddingTop: 18,
+    paddingBottom: 20,
+    gap: 12,
+  },
+  title: {
+    flex: 1,
+    fontSize: 26,
+    fontWeight: '700',
   },
   hero: {
     height: 320,
-    backgroundColor: '#3d2b2b',
     marginBottom: 16,
+    overflow: 'hidden',
   },
   heroOverlay: {
     flex: 1,

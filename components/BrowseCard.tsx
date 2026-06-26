@@ -1,23 +1,26 @@
+import { Image } from 'expo-image';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type BrowseCardProps = {
   label: string;
-  color: string;
+  imageUrl: string;
+  overlayColor: string;
   tall?: boolean;
   wide?: boolean;
 };
 
-export default function BrowseCard({ label, color, tall = false, wide = false }: BrowseCardProps) {
+export default function BrowseCard({
+  label,
+  imageUrl,
+  overlayColor,
+  tall = false,
+  wide = false,
+}: BrowseCardProps) {
   return (
-    <Pressable
-      style={[
-        styles.card,
-        { backgroundColor: color },
-        tall && styles.tall,
-        wide && styles.wide,
-      ]}>
+    <Pressable style={[styles.card, tall && styles.tall, wide && styles.wide]}>
+      <Image source={{ uri: imageUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
+      <View style={[StyleSheet.absoluteFill, { backgroundColor: overlayColor }]} />
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.decor} />
     </Pressable>
   );
 }
@@ -46,15 +49,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     zIndex: 1,
-  },
-  decor: {
-    position: 'absolute',
-    bottom: -10,
-    right: -10,
-    width: 60,
-    height: 60,
-    borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.15)',
-    transform: [{ rotate: '20deg' }],
   },
 });

@@ -1,7 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
-import TabBarWithMiniPlayer from '@/components/TabBarWithMiniPlayer';
 import { useTheme } from '@/context/ThemeContext';
 
 const ICON_SIZE = 26;
@@ -11,7 +10,6 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      tabBar={(props) => <TabBarWithMiniPlayer {...props} />}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.tabIconSelected,

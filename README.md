@@ -4,17 +4,18 @@ A Spotify-inspired multi-screen mobile app built with **Expo**, **TypeScript**, 
 
 ## Reference Application
 
-The reference app chosen is **Spotify**. The goal was to recreate its navigation structure and core screen layouts using placeholder content instead of real album art or audio playback.
+The reference app chosen is **Spotify**. The goal was to recreate its navigation structure and core screen layouts using remote images from [Unsplash](https://unsplash.com) for album art, browse tiles, and hero banners.
 
 ### Reference Screenshots
 
-| Home | Search |
-|:---:|:---:|
-| ![Reference Home](docs/images/reference/home.png) | ![Reference Search](docs/images/reference/search.png) |
-
-| Your Library | Premium |
-|:---:|:---:|
-| ![Reference Library](docs/images/reference/library.png) | ![Reference Premium](docs/images/reference/premium.png) |
+<p align="center">
+  <img src="docs/images/reference/home.png" width="220" alt="Reference Home" />
+  <img src="docs/images/reference/search.png" width="220" alt="Reference Search" />
+</p>
+<p align="center">
+  <img src="docs/images/reference/library.png" width="220" alt="Reference Library" />
+  <img src="docs/images/reference/premium.png" width="220" alt="Reference Premium" />
+</p>
 
 ## What Was Built
 
@@ -36,7 +37,7 @@ The reference app chosen is **Spotify**. The goal was to recreate its navigation
 
 ```
 Root (ThemeProvider)
-└── Tabs (5 tabs + mini-player)
+└── Tabs (5 tabs)
     ├── Home
     ├── Search
     ├── Library (Stack)
@@ -51,35 +52,57 @@ Root (ThemeProvider)
 - **Home** — Filter chips, horizontal carousels (New Music Friday, Recents, Albums)
 - **Search** — Search bar, browse grid, discover row
 - **Your Library** — Filter chips, sort row, scrollable list of playlists and artists
-- **Library Detail** — Opened by tapping a library item; shows title, metadata, and track list
-- **Premium** — Promotional hero and feature list
+- **Library Detail** — Opened by tapping a library item; shows cover image, metadata, and track list
+- **Premium** — Promotional hero image and feature list
 - **Create** — Placeholder screen for the fifth tab
 
 ### Key Features
 
-- **Reusable components:** `LibraryListItem`, `FilterChip`, `HorizontalCard`, `BrowseCard`, `MiniPlayer`, `ThemeToggle`
-- **Mock data:** Centralized in `constants/mockData.ts`
+- **Reusable components:** `LibraryListItem`, `FilterChip`, `HorizontalCard`, `BrowseCard`, `CoverImage`, `ThemeToggle`
+- **Mock data:** Centralized in `constants/mockData.ts` with image URLs from `constants/images.ts`
 - **Theming:** Spotify-style dark palette with light mode support and a top-right theme toggle
-- **Mini-player:** Persistent playback bar above the tab bar on main screens
 
 ## App Screenshots
 
-| Home | Search |
-|:---:|:---:|
-| ![App Home](docs/images/app/home.png) | ![App Search](docs/images/app/search.png) |
+<p align="center">
+  <img src="docs/images/app/home.png" width="220" alt="App Home" />
+  <img src="docs/images/app/search.png" width="220" alt="App Search" />
+</p>
+<p align="center">
+  <img src="docs/images/app/library.png" width="220" alt="App Library" />
+  <img src="docs/images/app/library-detail.png" width="220" alt="App Library Detail" />
+</p>
+<p align="center">
+  <img src="docs/images/app/premium.png" width="220" alt="App Premium" />
+  <img src="docs/images/app/create.png" width="220" alt="App Create" />
+</p>
 
-| Your Library | Liked Songs (Detail) |
-|:---:|:---:|
-| ![App Library](docs/images/app/library.png) | ![App Library Detail](docs/images/app/library-detail.png) |
+## Image Sources
 
-| Premium | Create |
-|:---:|:---:|
-| ![App Premium](docs/images/app/premium.png) | ![App Create](docs/images/app/create.png) |
+All in-app artwork is loaded from **Unsplash** via remote URLs defined in [`constants/images.ts`](constants/images.ts). Images are used for educational purposes only as part of this assignment.
+
+| Used for | Photographer | Source |
+|---|---|---|
+| New Music Friday cards, Live Events tile | Aditya Chinchure | [Unsplash](https://unsplash.com/photos/people-at-a-concert-photos-dSXiDv8wDmI) |
+| Fresh Finds card, #heartbroken discover tile | Joey Kyber | [Unsplash](https://unsplash.com/photos/person-playing-vinyl-record-1454922915609) |
+| New Noise card, Culture III album, Podcasts tile | Aditya Chinchure | [Unsplash](https://unsplash.com/photos/dj-performing-on-stage-with-red-lights-dSXiDv8wDmI) |
+| Mustard artist image | Aiony Haust | [Unsplash](https://unsplash.com/photos/man-in-black-button-up-shirt-Z2VJuXdT6GQ) |
+| Migos artist image | Hannah Busing | [Unsplash](https://unsplash.com/photos/group-of-people-standing-beside-brown-wooden-wall-Zyx1bK9mqmA) |
+| Drake artist image | Alexandra Gorn | [Unsplash](https://unsplash.com/photos/woman-in-black-shirt-smiling-CdOKbp2y4n4) |
+| Liked Songs playlist, Music for you, Chill vibes tiles | C D-X | [Unsplash](https://unsplash.com/photos/black-and-silver-headphones-on-white-surface-1505740420928) |
+| Starboy album card, Liked Songs / Made For You tiles | Possessed Photography | [Unsplash](https://unsplash.com/photos/purple-and-blue-light-illustration-3gAiajAfmaA) |
+| Certified Lover Boy album, Music browse tile | Alejandro Escamilla | [Unsplash](https://unsplash.com/photos/photography-of-guitar-and-drum-set-1493225457124) |
+| Podcasts browse tile | Samuel Giacomelli | [Unsplash](https://unsplash.com/photos/person-holding-black-headphones-1516280440614) |
+| Audiobooks browse tile | Sincerely Media | [Unsplash](https://unsplash.com/photos/person-holding-book-on-white-table-Zpzf7TLwWM0) |
+| Premium hero banner | Jannis Lucas | [Unsplash](https://unsplash.com/photos/person-holding-ice-cream-cone-with-cherry-on-top-2Tw0e3GOISI) |
+
+Full attribution metadata is also listed in [`constants/images.ts`](constants/images.ts).
 
 ## Tech Stack
 
 - [Expo](https://expo.dev/) ~56
 - [Expo Router](https://docs.expo.dev/router/introduction/) ~56
+- [expo-image](https://docs.expo.dev/versions/latest/sdk/image/)
 - React Native 0.85
 - TypeScript
 - `@expo/vector-icons`
@@ -92,14 +115,14 @@ spotifi/
 ├── app/
 │   ├── _layout.tsx              # Root layout + ThemeProvider
 │   └── (tabs)/
-│       ├── _layout.tsx          # 5-tab navigator + mini-player
+│       ├── _layout.tsx          # 5-tab navigator
 │       ├── index.tsx            # Home
 │       ├── search.tsx
 │       ├── library/             # Stack navigator
 │       ├── premium.tsx
 │       └── create.tsx
 ├── components/                  # Reusable UI components
-├── constants/                   # Colors, mock data
+├── constants/                   # Colors, mock data, image URLs
 ├── context/                     # ThemeContext
 ├── types/                       # TypeScript interfaces
 └── docs/images/                 # Reference & app screenshots
@@ -121,10 +144,11 @@ npm start
 
 Then press `i` for iOS simulator, `a` for Android emulator, or scan the QR code with Expo Go.
 
+**Note:** Remote images require an internet connection when running the app.
+
 ## Notes
 
-- Album art uses colored placeholder blocks rather than remote images.
-- Search input and playback controls are visual only (no real audio).
+- Search input is visual only (no real audio or playback).
 - The app defaults to the system light/dark mode; use the sun/moon icon to toggle manually.
 
 ## Author

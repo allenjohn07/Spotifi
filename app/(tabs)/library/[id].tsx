@@ -2,8 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { detailTracks, libraryItems } from '@/constants/mockData';
+import { CoverImageWithOverlay } from '@/components/CoverImage';
 import ThemeToggle from '@/components/ThemeToggle';
+import { detailTracks, libraryItems } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function LibraryDetailScreen() {
@@ -36,15 +37,22 @@ export default function LibraryDetailScreen() {
       <ScrollView
         style={{ backgroundColor: colors.background }}
         contentContainerStyle={styles.content}>
-        <View
-          style={[
-            styles.hero,
-            isCircle ? styles.circle : styles.square,
-            { backgroundColor: item.imageColor },
-          ]}>
-          {item.id === 'liked' ? (
+        <View style={styles.cover}>
+        {item.id === 'liked' ? (
+          <CoverImageWithOverlay
+            uri={item.imageUrl!}
+            size={200}
+            variant="square"
+            overlayColor="rgba(80, 56, 160, 0.65)">
             <Ionicons name="heart" size={48} color="#ffffff" />
-          ) : null}
+          </CoverImageWithOverlay>
+        ) : (
+          <CoverImageWithOverlay
+            uri={item.imageUrl!}
+            size={200}
+            variant={isCircle ? 'circle' : 'square'}
+          />
+        )}
         </View>
 
         <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
@@ -56,14 +64,18 @@ export default function LibraryDetailScreen() {
           <Ionicons name="ellipsis-horizontal" size={28} color={colors.textSecondary} />
         </View>
 
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Popular</Text>
-        {detailTracks.map((track, index) => (
-          <View key={track} style={styles.trackRow}>
-            <Text style={[styles.trackIndex, { color: colors.textSecondary }]}>{index + 1}</Text>
-            <Text style={[styles.trackTitle, { color: colors.text }]}>{track}</Text>
-            <Ionicons name="ellipsis-horizontal" size={18} color={colors.textSecondary} />
-          </View>
-        ))}
+        <View style={styles.listSection}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Popular</Text>
+          {detailTracks.map((track, index) => (
+            <View key={track} style={styles.trackRow}>
+              <Text style={[styles.trackIndex, { color: colors.textSecondary }]}>{index + 1}</Text>
+              <Text style={[styles.trackTitle, { color: colors.text }]} numberOfLines={1}>
+                {track}
+              </Text>
+              <Ionicons name="ellipsis-horizontal" size={18} color={colors.textSecondary} />
+            </View>
+          ))}
+        </View>
       </ScrollView>
     </>
   );
@@ -82,25 +94,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 28,
     paddingBottom: 64,
-  },
-  hero: {
-    width: 200,
-    height: 200,
-    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  cover: {
     marginBottom: 20,
-  },
-  square: {
-    borderRadius: 6,
-  },
-  circle: {
-    borderRadius: 100,
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
+    alignSelf: 'stretch',
   },
   subtitle: {
     fontSize: 14,
@@ -114,10 +117,15 @@ const styles = StyleSheet.create({
     gap: 24,
     marginVertical: 24,
   },
+  listSection: {
+    alignSelf: 'stretch',
+    marginTop: 8,
+  },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 12,
+    textAlign: 'left',
   },
   trackRow: {
     flexDirection: 'row',
@@ -128,9 +136,11 @@ const styles = StyleSheet.create({
   trackIndex: {
     width: 20,
     fontSize: 14,
+    textAlign: 'left',
   },
   trackTitle: {
     flex: 1,
     fontSize: 16,
+    textAlign: 'left',
   },
 });

@@ -16,7 +16,7 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function SearchScreen() {
   const { colors } = useTheme();
-  const bottomPadding = useBottomTabBarHeight() + 40;
+  const bottomPadding = useBottomTabBarHeight() + 20;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>
@@ -44,7 +44,11 @@ export default function SearchScreen() {
           <View style={styles.grid}>
             {browseCategories.map((category) => (
               <View key={category.id} style={styles.gridItem}>
-                <BrowseCard label={category.label} color={category.color} />
+                <BrowseCard
+                  label={category.label}
+                  imageUrl={category.imageUrl}
+                  overlayColor={category.overlayColor}
+                />
               </View>
             ))}
           </View>
@@ -59,7 +63,12 @@ export default function SearchScreen() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.listContent}
             renderItem={({ item }) => (
-              <BrowseCard label={item.label} color={item.imageColor} tall />
+              <BrowseCard
+                label={item.label}
+                imageUrl={item.imageUrl}
+                overlayColor={item.overlayColor}
+                tall
+              />
             )}
           />
         </View>
@@ -68,7 +77,13 @@ export default function SearchScreen() {
           <SectionHeader title="Browse all" />
           <View style={styles.browseAll}>
             {browseAllItems.map((item) => (
-              <BrowseCard key={item.id} label={item.label} color={item.color} wide />
+              <BrowseCard
+                key={item.id}
+                label={item.label}
+                imageUrl={item.imageUrl}
+                overlayColor={item.overlayColor}
+                wide
+              />
             ))}
           </View>
         </View>

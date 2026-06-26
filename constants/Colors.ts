@@ -8,7 +8,6 @@ export type ThemeColors = {
   tabIconDefault: string;
   tabIconSelected: string;
   primary: string;
-  miniPlayer: string;
   searchBar: string;
   searchBarText: string;
   border: string;
@@ -24,7 +23,6 @@ const light: ThemeColors = {
   tabIconDefault: '#6a6a6a',
   tabIconSelected: '#000000',
   primary: '#1DB954',
-  miniPlayer: '#4a1c2e',
   searchBar: '#ffffff',
   searchBarText: '#000000',
   border: '#e0e0e0',
@@ -40,7 +38,6 @@ const dark: ThemeColors = {
   tabIconDefault: '#b3b3b3',
   tabIconSelected: '#ffffff',
   primary: '#1DB954',
-  miniPlayer: '#4a1c2e',
   searchBar: '#ffffff',
   searchBarText: '#000000',
   border: '#282828',

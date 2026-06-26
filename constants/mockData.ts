@@ -3,15 +3,10 @@ import type {
   DiscoverItem,
   HomeSection,
   LibraryItem,
-  NowPlaying,
   PremiumFeature,
 } from '@/types';
 
-export const nowPlaying: NowPlaying = {
-  title: 'True Colors',
-  artist: 'The Weeknd',
-  device: 'AirPods Pro',
-};
+import { images } from './images';
 
 export const homeFilters = ['All', 'Music', 'Podcasts', 'Audiobooks'];
 
@@ -23,21 +18,21 @@ export const homeSections: HomeSection[] = [
         id: 'nmf-1',
         title: 'New Music Friday Canada',
         subtitle: 'The Weeknd, Drake, and more. Cover: PARTYNEXTDOOR',
-        imageColor: '#e13300',
+        imageUrl: images.concertCrowd,
         variant: 'square',
       },
       {
         id: 'nmf-2',
         title: 'New Noise',
         subtitle: 'The hottest alternative rock tracks',
-        imageColor: '#1e3264',
+        imageUrl: images.djLights,
         variant: 'square',
       },
       {
         id: 'nmf-3',
         title: 'Fresh Finds',
         subtitle: 'New music from up-and-coming artists',
-        imageColor: '#477d95',
+        imageUrl: images.vinyl,
         variant: 'square',
       },
     ],
@@ -50,28 +45,28 @@ export const homeSections: HomeSection[] = [
         id: 'rec-1',
         title: 'Mustard',
         subtitle: 'Artist',
-        imageColor: '#8d67ab',
+        imageUrl: images.portrait1,
         variant: 'circle',
       },
       {
         id: 'rec-2',
         title: 'Migos',
         subtitle: 'Artist',
-        imageColor: '#ba5d07',
+        imageUrl: images.groupFriends,
         variant: 'circle',
       },
       {
         id: 'rec-3',
         title: 'Liked Songs',
         subtitle: 'Playlist • Spotify',
-        imageColor: '#503750',
+        imageUrl: images.playlistPurple,
         variant: 'square',
       },
       {
         id: 'rec-4',
         title: 'Drake',
         subtitle: 'Artist',
-        imageColor: '#e8115b',
+        imageUrl: images.portrait2,
         variant: 'circle',
       },
     ],
@@ -83,21 +78,21 @@ export const homeSections: HomeSection[] = [
         id: 'alb-1',
         title: 'Starboy',
         subtitle: 'The Weeknd',
-        imageColor: '#27856a',
+        imageUrl: images.neonStudio,
         variant: 'square',
       },
       {
         id: 'alb-2',
         title: 'Culture III',
         subtitle: 'Migos',
-        imageColor: '#509bf5',
+        imageUrl: images.djDeck,
         variant: 'square',
       },
       {
         id: 'alb-3',
         title: 'Certified Lover Boy',
         subtitle: 'Drake',
-        imageColor: '#8c1932',
+        imageUrl: images.studioMic,
         variant: 'square',
       },
     ],
@@ -105,22 +100,22 @@ export const homeSections: HomeSection[] = [
 ];
 
 export const browseCategories: BrowseCategory[] = [
-  { id: 'music', label: 'Music', color: '#e13300' },
-  { id: 'podcasts', label: 'Podcasts', color: '#27856a' },
-  { id: 'audiobooks', label: 'Audiobooks', color: '#1e3264' },
-  { id: 'events', label: 'Live Events', color: '#8d67ab' },
+  { id: 'music', label: 'Music', imageUrl: images.musicMic, overlayColor: 'rgba(225, 51, 0, 0.75)' },
+  { id: 'podcasts', label: 'Podcasts', imageUrl: images.podcastMic, overlayColor: 'rgba(39, 133, 106, 0.75)' },
+  { id: 'audiobooks', label: 'Audiobooks', imageUrl: images.books, overlayColor: 'rgba(30, 50, 100, 0.75)' },
+  { id: 'events', label: 'Live Events', imageUrl: images.liveEvent, overlayColor: 'rgba(141, 103, 171, 0.75)' },
 ];
 
 export const discoverItems: DiscoverItem[] = [
-  { id: 'd1', label: 'Music for you', imageColor: '#503750' },
-  { id: 'd2', label: '#malayalam indie', imageColor: '#477d95' },
-  { id: 'd3', label: '#heartbroken', imageColor: '#8c1932' },
-  { id: 'd4', label: 'Chill vibes', imageColor: '#27856a' },
+  { id: 'd1', label: 'Music for you', imageUrl: images.headphones, overlayColor: 'rgba(80, 55, 80, 0.55)' },
+  { id: 'd2', label: '#malayalam indie', imageUrl: images.djLights, overlayColor: 'rgba(71, 125, 149, 0.55)' },
+  { id: 'd3', label: '#heartbroken', imageUrl: images.vinyl, overlayColor: 'rgba(140, 25, 50, 0.55)' },
+  { id: 'd4', label: 'Chill vibes', imageUrl: images.headphones, overlayColor: 'rgba(39, 133, 106, 0.55)' },
 ];
 
 export const browseAllItems: BrowseCategory[] = [
-  { id: 'mfy', label: 'Made For You', color: '#503750' },
-  { id: 'upcoming', label: 'Upcoming Events', color: '#27856a' },
+  { id: 'mfy', label: 'Made For You', imageUrl: images.playlistPurple, overlayColor: 'rgba(80, 55, 80, 0.7)' },
+  { id: 'upcoming', label: 'Upcoming Events', imageUrl: images.djDeck, overlayColor: 'rgba(39, 133, 106, 0.7)' },
 ];
 
 export const libraryFilters = ['Playlists', 'Artists'];
@@ -131,37 +126,38 @@ export const libraryItems: LibraryItem[] = [
     title: 'Liked Songs',
     subtitle: 'Playlist • Allen',
     type: 'playlist',
-    imageColor: '#5038a0',
+    imageUrl: images.playlistPurple,
   },
   {
     id: 'mustard',
     title: 'Mustard',
     subtitle: 'Artist',
     type: 'artist',
-    imageColor: '#8d67ab',
+    imageUrl: images.portrait1,
   },
   {
     id: 'migos',
     title: 'Migos',
     subtitle: 'Artist',
     type: 'artist',
-    imageColor: '#ba5d07',
+    imageUrl: images.groupFriends,
   },
   {
     id: 'drake',
     title: 'Drake',
     subtitle: 'Artist',
     type: 'artist',
-    imageColor: '#e8115b',
+    imageUrl: images.portrait2,
   },
   {
     id: 'add-artists',
     title: 'Add artists',
     subtitle: '',
     type: 'action',
-    imageColor: '#282828',
   },
 ];
+
+export const premiumHeroImage = images.iceCream;
 
 export const premiumFeatures: PremiumFeature[] = [
   { id: '1', label: 'Ad-free music listening', icon: 'volume-mute' },

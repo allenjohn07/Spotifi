@@ -15,7 +15,7 @@ import type { HomeCard } from '@/types';
 export default function HomeScreen() {
   const { colors } = useTheme();
   const [activeFilter, setActiveFilter] = useState('All');
-  const bottomPadding = useBottomTabBarHeight() + 40;
+  const bottomPadding = useBottomTabBarHeight() + 20;
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>
@@ -52,7 +52,7 @@ export default function HomeScreen() {
                 <HorizontalCard
                   title={item.title}
                   subtitle={item.subtitle}
-                  imageColor={item.imageColor}
+                  imageUrl={item.imageUrl}
                   variant={item.variant}
                   size={section.title.includes('New Music') ? 'large' : 'medium'}
                 />

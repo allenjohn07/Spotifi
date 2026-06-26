@@ -4,7 +4,7 @@ export interface HomeCard {
   id: string;
   title: string;
   subtitle: string;
-  imageColor: string;
+  imageUrl: string;
   variant: CardVariant;
 }
 
@@ -17,13 +17,15 @@ export interface HomeSection {
 export interface BrowseCategory {
   id: string;
   label: string;
-  color: string;
+  imageUrl: string;
+  overlayColor: string;
 }
 
 export interface DiscoverItem {
   id: string;
   label: string;
-  imageColor: string;
+  imageUrl: string;
+  overlayColor: string;
 }
 
 export interface LibraryItem {
@@ -31,17 +33,11 @@ export interface LibraryItem {
   title: string;
   subtitle: string;
   type: 'playlist' | 'artist' | 'action';
-  imageColor: string;
+  imageUrl?: string;
 }
 
 export interface PremiumFeature {
   id: string;
   label: string;
   icon: string;
-}
-
-export interface NowPlaying {
-  title: string;
-  artist: string;
-  device: string;
 }
