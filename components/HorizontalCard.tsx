@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
+import AnimatedPressable from '@/components/AnimatedPressable';
 import CoverImage from '@/components/CoverImage';
 import { useTheme } from '@/context/ThemeContext';
 import type { CardVariant } from '@/types';
@@ -25,7 +26,7 @@ export default function HorizontalCard({
   const imageSize = size === 'large' ? 150 : size === 'small' ? 100 : 130;
 
   return (
-    <Pressable onPress={onPress} style={[styles.container, { width: imageSize }]}>
+    <AnimatedPressable onPress={onPress} style={[styles.container, { width: imageSize }]}>
       <CoverImage uri={imageUrl} size={imageSize} variant={variant} />
       <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
         {title}
@@ -33,7 +34,7 @@ export default function HorizontalCard({
       <Text style={[styles.subtitle, { color: colors.textSecondary }]} numberOfLines={2}>
         {subtitle}
       </Text>
-    </Pressable>
+    </AnimatedPressable>
   );
 }
 

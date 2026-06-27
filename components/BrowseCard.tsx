@@ -1,5 +1,7 @@
 import { Image } from 'expo-image';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import AnimatedPressable from '@/components/AnimatedPressable';
 
 type BrowseCardProps = {
   label: string;
@@ -17,11 +19,11 @@ export default function BrowseCard({
   wide = false,
 }: BrowseCardProps) {
   return (
-    <Pressable style={[styles.card, tall && styles.tall, wide && styles.wide]}>
+    <AnimatedPressable style={[styles.card, tall && styles.tall, wide && styles.wide]}>
       <Image source={{ uri: imageUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
       <View style={[StyleSheet.absoluteFill, { backgroundColor: overlayColor }]} />
       <Text style={styles.label}>{label}</Text>
-    </Pressable>
+    </AnimatedPressable>
   );
 }
 

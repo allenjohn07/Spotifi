@@ -58,9 +58,28 @@ Root (ThemeProvider)
 
 ### Key Features
 
-- **Reusable components:** `LibraryListItem`, `FilterChip`, `HorizontalCard`, `BrowseCard`, `CoverImage`, `ThemeToggle`
+- **Reusable components:** `LibraryListItem`, `FilterChip`, `HorizontalCard`, `BrowseCard`, `CoverImage`, `AnimatedPressable`, `FadeInView`, `ThemeToggle`
 - **Mock data:** Centralized in `constants/mockData.ts` with image URLs from `constants/images.ts`
 - **Theming:** Spotify-style dark palette with light mode support and a top-right theme toggle
+- **Animations:** Subtle fade-in and press feedback on all screens using [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)
+
+### Animations
+
+Animations are kept simple and consistent across every screen. Timing values live in [`constants/animations.ts`](constants/animations.ts).
+
+| Animation | Where it appears |
+|---|---|
+| **Fade in + slide up** | Headers, search bar, filter chips, carousels, browse sections, premium hero, and library detail content |
+| **Staggered sections** | Home carousels, Search browse blocks, Premium features card |
+| **Staggered list items** | Library playlist/artist rows and detail track lists |
+| **Press scale** | Filter chips, browse cards, horizontal cards, and library list rows |
+
+Shared delay pattern on each tab screen:
+
+- **0ms** — page header
+- **80ms** — secondary content (e.g. search bar, filter chips, hero banner)
+- **160ms + 80ms × section index** — main content sections
+- **60ms × list index** — individual list rows (with a section base delay where needed)
 
 ## App Screenshots
 
@@ -106,6 +125,7 @@ Full attribution metadata is also listed in [`constants/images.ts`](constants/im
 - React Native 0.85
 - TypeScript
 - `@expo/vector-icons`
+- `react-native-reanimated`
 - `react-native-safe-area-context`
 
 ## Project Structure
@@ -121,8 +141,8 @@ spotifi/
 │       ├── library/             # Stack navigator
 │       ├── premium.tsx
 │       └── create.tsx
-├── components/                  # Reusable UI components
-├── constants/                   # Colors, mock data, image URLs
+├── components/                  # Reusable UI components (incl. AnimatedPressable, FadeInView)
+├── constants/                   # Colors, mock data, image URLs, animation timing
 ├── context/                     # ThemeContext
 ├── types/                       # TypeScript interfaces
 └── docs/images/                 # Reference & app screenshots

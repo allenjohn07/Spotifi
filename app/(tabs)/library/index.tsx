@@ -6,9 +6,11 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FilterChip from '@/components/FilterChip';
+import FadeInView from '@/components/FadeInView';
 import LibraryListItem from '@/components/LibraryListItem';
 import ProfileAvatar from '@/components/ProfileAvatar';
 import ThemeToggle from '@/components/ThemeToggle';
+import { HEADER_DELAY, SECONDARY_DELAY, listItemDelay, sectionDelay } from '@/constants/animations';
 import { libraryFilters, libraryItems } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 import type { LibraryItem } from '@/types';
@@ -25,7 +27,7 @@ export default function LibraryScreen() {
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]} edges={['top']}>
-      <View style={styles.header}>
+      <FadeInView delay={HEADER_DELAY} style={styles.header}>
         <ProfileAvatar />
         <Text style={[styles.title, { color: colors.text }]}>Your Library</Text>
         <View style={styles.headerIcons}>
@@ -33,33 +35,39 @@ export default function LibraryScreen() {
           <Ionicons name="add-circle-outline" size={26} color={colors.text} />
           <ThemeToggle />
         </View>
-      </View>
+      </FadeInView>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chips}>
-        {libraryFilters.map((filter) => (
-          <FilterChip
-            key={filter}
-            label={filter}
-            active={activeFilter === filter}
-            onPress={() => setActiveFilter(filter)}
-          />
-        ))}
-      </ScrollView>
+      <FadeInView delay={SECONDARY_DELAY}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chips}>
+          {libraryFilters.map((filter) => (
+            <FilterChip
+              key={filter}
+              label={filter}
+              active={activeFilter === filter}
+              onPress={() => setActiveFilter(filter)}
+            />
+          ))}
+        </ScrollView>
+      </FadeInView>
 
-      <View style={styles.sortRow}>
+      <FadeInView delay={sectionDelay(0)} style={styles.sortRow}>
         <View style={styles.sortLeft}>
           <Ionicons name="swap-vertical" size={16} color={colors.textSecondary} />
           <Text style={[styles.sortText, { color: colors.textSecondary }]}>Recents</Text>
         </View>
         <Ionicons name="grid-outline" size={20} color={colors.textSecondary} />
-      </View>
+      </FadeInView>
 
       <FlatList
         data={libraryItems}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: bottomPadding }}
-        renderItem={({ item }) => (
-          <LibraryListItem item={item} onPress={() => handlePress(item)} />
+        renderItem={({ item, index }) => (
+          <LibraryListItem
+            item={item}
+            delay={sectionDelay(1) + listItemDelay(index)}
+            onPress={() => handlePress(item)}
+          />
         )}
       />
     </SafeAreaView>

@@ -4,9 +4,11 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BrowseCard from '@/components/BrowseCard';
+import FadeInView from '@/components/FadeInView';
 import ProfileAvatar from '@/components/ProfileAvatar';
 import SectionHeader from '@/components/SectionHeader';
 import ThemeToggle from '@/components/ThemeToggle';
+import { HEADER_DELAY, SECONDARY_DELAY, sectionDelay } from '@/constants/animations';
 import {
   browseAllItems,
   browseCategories,
@@ -23,23 +25,25 @@ export default function SearchScreen() {
       <ScrollView
         contentContainerStyle={{ paddingBottom: bottomPadding }}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
+        <FadeInView delay={HEADER_DELAY} style={styles.header}>
           <ProfileAvatar />
           <Text style={[styles.title, { color: colors.text }]}>Search</Text>
           <View style={styles.headerRight}>
             <ThemeToggle />
             <Ionicons name="camera-outline" size={24} color={colors.text} />
           </View>
-        </View>
+        </FadeInView>
 
-        <View style={[styles.searchBar, { backgroundColor: colors.searchBar }]}>
-          <Ionicons name="search" size={20} color={colors.textSecondary} />
-          <Text style={[styles.searchPlaceholder, { color: colors.textSecondary }]}>
-            What do you want to listen to?
-          </Text>
-        </View>
+        <FadeInView delay={SECONDARY_DELAY}>
+          <View style={[styles.searchBar, { backgroundColor: colors.searchBar }]}>
+            <Ionicons name="search" size={20} color={colors.textSecondary} />
+            <Text style={[styles.searchPlaceholder, { color: colors.textSecondary }]}>
+              What do you want to listen to?
+            </Text>
+          </View>
+        </FadeInView>
 
-        <View style={styles.section}>
+        <FadeInView delay={sectionDelay(0)} style={styles.section}>
           <SectionHeader title="Start browsing" />
           <View style={styles.grid}>
             {browseCategories.map((category) => (
@@ -52,9 +56,9 @@ export default function SearchScreen() {
               </View>
             ))}
           </View>
-        </View>
+        </FadeInView>
 
-        <View style={styles.section}>
+        <FadeInView delay={sectionDelay(1)} style={styles.section}>
           <SectionHeader title="Discover something new" />
           <FlatList
             horizontal
@@ -71,9 +75,9 @@ export default function SearchScreen() {
               />
             )}
           />
-        </View>
+        </FadeInView>
 
-        <View style={styles.section}>
+        <FadeInView delay={sectionDelay(2)} style={styles.section}>
           <SectionHeader title="Browse all" />
           <View style={styles.browseAll}>
             {browseAllItems.map((item) => (
@@ -86,7 +90,7 @@ export default function SearchScreen() {
               />
             ))}
           </View>
-        </View>
+        </FadeInView>
       </ScrollView>
     </SafeAreaView>
   );

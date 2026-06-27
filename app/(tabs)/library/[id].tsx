@@ -3,7 +3,9 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { CoverImageWithOverlay } from '@/components/CoverImage';
+import FadeInView from '@/components/FadeInView';
 import ThemeToggle from '@/components/ThemeToggle';
+import { HEADER_DELAY, SECONDARY_DELAY, listItemDelay, sectionDelay } from '@/constants/animations';
 import { detailTracks, libraryItems } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -37,7 +39,7 @@ export default function LibraryDetailScreen() {
       <ScrollView
         style={{ backgroundColor: colors.background }}
         contentContainerStyle={styles.content}>
-        <View style={styles.cover}>
+        <FadeInView delay={HEADER_DELAY} style={styles.cover}>
         {item.id === 'liked' ? (
           <CoverImageWithOverlay
             uri={item.imageUrl!}
@@ -53,29 +55,33 @@ export default function LibraryDetailScreen() {
             variant={isCircle ? 'circle' : 'square'}
           />
         )}
-        </View>
+        </FadeInView>
 
-        <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{item.subtitle}</Text>
+        <FadeInView delay={SECONDARY_DELAY}>
+          <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
+          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{item.subtitle}</Text>
 
-        <View style={styles.actions}>
-          <Ionicons name="play-circle" size={56} color={colors.primary} />
-          <Ionicons name="shuffle" size={28} color={colors.textSecondary} />
-          <Ionicons name="ellipsis-horizontal" size={28} color={colors.textSecondary} />
-        </View>
+          <View style={styles.actions}>
+            <Ionicons name="play-circle" size={56} color={colors.primary} />
+            <Ionicons name="shuffle" size={28} color={colors.textSecondary} />
+            <Ionicons name="ellipsis-horizontal" size={28} color={colors.textSecondary} />
+          </View>
+        </FadeInView>
 
-        <View style={styles.listSection}>
+        <FadeInView delay={sectionDelay(0)} style={styles.listSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Popular</Text>
           {detailTracks.map((track, index) => (
-            <View key={track} style={styles.trackRow}>
-              <Text style={[styles.trackIndex, { color: colors.textSecondary }]}>{index + 1}</Text>
-              <Text style={[styles.trackTitle, { color: colors.text }]} numberOfLines={1}>
-                {track}
-              </Text>
-              <Ionicons name="ellipsis-horizontal" size={18} color={colors.textSecondary} />
-            </View>
+            <FadeInView key={track} delay={sectionDelay(0) + listItemDelay(index + 1)}>
+              <View style={styles.trackRow}>
+                <Text style={[styles.trackIndex, { color: colors.textSecondary }]}>{index + 1}</Text>
+                <Text style={[styles.trackTitle, { color: colors.text }]} numberOfLines={1}>
+                  {track}
+                </Text>
+                <Ionicons name="ellipsis-horizontal" size={18} color={colors.textSecondary} />
+              </View>
+            </FadeInView>
           ))}
-        </View>
+        </FadeInView>
       </ScrollView>
     </>
   );

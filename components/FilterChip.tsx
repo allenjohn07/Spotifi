@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
+import AnimatedPressable from '@/components/AnimatedPressable';
 import { useTheme } from '@/context/ThemeContext';
 
 type FilterChipProps = {
@@ -12,7 +13,7 @@ export default function FilterChip({ label, active = false, onPress }: FilterChi
   const { colors, isDark } = useTheme();
 
   return (
-    <Pressable
+    <AnimatedPressable
       onPress={onPress}
       style={[
         styles.chip,
@@ -27,7 +28,7 @@ export default function FilterChip({ label, active = false, onPress }: FilterChi
         ]}>
         {label}
       </Text>
-    </Pressable>
+    </AnimatedPressable>
   );
 }
 

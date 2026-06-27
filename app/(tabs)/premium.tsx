@@ -4,8 +4,10 @@ import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import FadeInView from '@/components/FadeInView';
 import ProfileAvatar from '@/components/ProfileAvatar';
 import ThemeToggle from '@/components/ThemeToggle';
+import { HEADER_DELAY, SECONDARY_DELAY, sectionDelay } from '@/constants/animations';
 import { premiumFeatures, premiumHeroImage } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -18,13 +20,13 @@ export default function PremiumScreen() {
       <ScrollView
         contentContainerStyle={{ paddingBottom: bottomPadding }}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
+        <FadeInView delay={HEADER_DELAY} style={styles.header}>
           <ProfileAvatar />
           <Text style={[styles.title, { color: colors.text }]}>Premium</Text>
           <ThemeToggle />
-        </View>
+        </FadeInView>
 
-        <View style={styles.hero}>
+        <FadeInView delay={SECONDARY_DELAY} style={styles.hero}>
           <Image source={{ uri: premiumHeroImage }} style={StyleSheet.absoluteFill} contentFit="cover" />
           <View style={styles.heroOverlay}>
             <View style={styles.heroLabel}>
@@ -40,9 +42,9 @@ export default function PremiumScreen() {
               <Text style={styles.ctaText}>Get started</Text>
             </View>
           </View>
-        </View>
+        </FadeInView>
 
-        <View style={[styles.featuresCard, { backgroundColor: colors.card }]}>
+        <FadeInView delay={sectionDelay(0)} style={[styles.featuresCard, { backgroundColor: colors.card }]}>
           <Text style={[styles.featuresTitle, { color: colors.text }]}>Why join Premium?</Text>
           {premiumFeatures.map((feature) => (
             <View key={feature.id} style={styles.featureRow}>
@@ -50,7 +52,7 @@ export default function PremiumScreen() {
               <Text style={[styles.featureLabel, { color: colors.text }]}>{feature.label}</Text>
             </View>
           ))}
-        </View>
+        </FadeInView>
       </ScrollView>
     </SafeAreaView>
   );

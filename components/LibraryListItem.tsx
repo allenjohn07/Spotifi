@@ -1,16 +1,19 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
+import AnimatedPressable from '@/components/AnimatedPressable';
 import CoverImage, { CoverImageWithOverlay } from '@/components/CoverImage';
+import FadeInView from '@/components/FadeInView';
 import { useTheme } from '@/context/ThemeContext';
 import type { LibraryItem } from '@/types';
 
 type LibraryListItemProps = {
   item: LibraryItem;
   onPress?: () => void;
+  delay?: number;
 };
 
-export default function LibraryListItem({ item, onPress }: LibraryListItemProps) {
+export default function LibraryListItem({ item, onPress, delay = 0 }: LibraryListItemProps) {
   const { colors } = useTheme();
   const isCircle = item.type === 'artist' || item.type === 'action';
   const isAction = item.type === 'action';
@@ -36,19 +39,21 @@ export default function LibraryListItem({ item, onPress }: LibraryListItemProps)
   );
 
   return (
-    <Pressable onPress={onPress} style={styles.row}>
-      <View style={styles.imageWrap}>{imageContent}</View>
-      <View style={styles.textContainer}>
-        <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
-          {item.title}
-        </Text>
-        {item.subtitle ? (
-          <Text style={[styles.subtitle, { color: colors.textSecondary }]} numberOfLines={1}>
-            {item.subtitle}
+    <FadeInView delay={delay}>
+      <AnimatedPressable onPress={onPress} style={styles.row}>
+        <View style={styles.imageWrap}>{imageContent}</View>
+        <View style={styles.textContainer}>
+          <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
+            {item.title}
           </Text>
-        ) : null}
-      </View>
-    </Pressable>
+          {item.subtitle ? (
+            <Text style={[styles.subtitle, { color: colors.textSecondary }]} numberOfLines={1}>
+              {item.subtitle}
+            </Text>
+          ) : null}
+        </View>
+      </AnimatedPressable>
+    </FadeInView>
   );
 }
 

@@ -4,10 +4,12 @@ import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FilterChip from '@/components/FilterChip';
+import FadeInView from '@/components/FadeInView';
 import HorizontalCard from '@/components/HorizontalCard';
 import ProfileAvatar from '@/components/ProfileAvatar';
 import SectionHeader from '@/components/SectionHeader';
 import ThemeToggle from '@/components/ThemeToggle';
+import { HEADER_DELAY, sectionDelay } from '@/constants/animations';
 import { homeFilters, homeSections } from '@/constants/mockData';
 import { useTheme } from '@/context/ThemeContext';
 import type { HomeCard } from '@/types';
@@ -22,7 +24,7 @@ export default function HomeScreen() {
       <ScrollView
         contentContainerStyle={{ paddingBottom: bottomPadding }}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
+        <FadeInView delay={HEADER_DELAY} style={styles.header}>
           <View style={styles.topRow}>
             <ProfileAvatar />
             <ThemeToggle />
@@ -37,10 +39,10 @@ export default function HomeScreen() {
               />
             ))}
           </ScrollView>
-        </View>
+        </FadeInView>
 
-        {homeSections.map((section) => (
-          <View key={section.title} style={styles.section}>
+        {homeSections.map((section, sectionIndex) => (
+          <FadeInView key={section.title} delay={sectionDelay(sectionIndex)} style={styles.section}>
             <SectionHeader title={section.title} showAll={section.showAll} />
             <FlatList
               horizontal
@@ -58,7 +60,7 @@ export default function HomeScreen() {
                 />
               )}
             />
-          </View>
+          </FadeInView>
         ))}
       </ScrollView>
     </SafeAreaView>
